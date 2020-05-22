@@ -134,6 +134,12 @@
 
 2. 如果一个组件有多个state,那么useState怎么知道哪一次调用返回哪一个state呢？   按照第一次运行的次序来顺序返回的
 
+3. 如果新的状态的值要通过前一状态的值计算得到，可以向setCount里面传入函数（ 在一个异步回调函数的执行中，获取到 `count` 最新一帧中的值，不妨向 `setCount` [传入函数作为参数](https://reactjs.org/docs/hooks-reference.html#functional-updates) ）
+
+   ```jsx
+    <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
+   ```
+
    ```jsx
    function App(props){
    	const [count,setCount] = useState(() => {
@@ -141,6 +147,12 @@
    	})
    }
    ```
+
+4. 例如需要读取到 state 及其衍生的某个常量，相对于变量声明时所在帧过去或未来的值，就需要使用 `useRef`，通过它来拥有一个在所有帧中共享的变量。
+
+    [查看详情]( https://juejin.im/post/5ec7372cf265da76de5cd0c9#heading-4 ) 
+
+    
 
 #### useEffect
 
